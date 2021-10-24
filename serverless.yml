@@ -30,6 +30,12 @@ functions:
       - http:
           method: POST
           path: /celebrity
+  getCelebrities:
+    handler: src/handlers/getCelebrities.handler
+    events:
+      - http:
+          method: GET
+          path: /celebrity
 
 custom:
   CelebrityTable:
