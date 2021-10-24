@@ -1,4 +1,4 @@
-import dynamoose from 'dynamoose';
+import dynamoose from "dynamoose";
 import { v4 as uuid } from "uuid";
 const celebritySchema = new dynamoose.Schema(
   {

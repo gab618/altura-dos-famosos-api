@@ -10,11 +10,28 @@ provider:
   runtime: nodejs12.x
   memorySize: 256
   stage: ${opt:stage, 'dev'}
-  
+  region: "sa-east-1"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "*"
+  # iamRoleStatements:
+  #   - ${file(iam/CelebrityTableIAM.yml):CelebrityTableIAM}
+
+resources:
+  Resources:
+    CelebrityTable: ${file(resources/CelebrityTable.yml):CelebrityTable}
+
 functions:
-  hello:
-    handler: src/handlers/hello.handler
+  putCelebrity:
+    handler: src/handlers/putCelebrity.handler
     events:
       - http:
-          method: GET
-          path: /hello
+          method: POST
+          path: /celebrity
+
+custom:
+  CelebrityTable:
+    name: !Ref CelebrityTable
+    arn: !GetAtt CelebrityTable.Arn

@@ -1,0 +1,9 @@
+CelebrityTableIAM:
+  Effect: Allow
+  Action:
+    - dynamodb:PutItem
+    - dynamodb:Scan
+    - dynamodb:GetItem
+    - dynamodb:CreateTable
+  Resource:
+    - ${self:custom.CelebrityTable.arn}
